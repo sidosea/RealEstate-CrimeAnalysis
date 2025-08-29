@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2ed475feaa0d54b999334fbcf3ee4b6d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 50px; right: 50px; width: 200px; height: 120px; 
+                border:2px solid grey; z-index:9999; font-size:14px;
+                background-color:white;
+                padding: 10px;
+                ">
+    <p><strong>범례</strong></p>
+    <p><span style="color: red;">■</span> 범죄 발생 (색이 진할수록 범죄율 높음)</p>
+    <p><span style="color: purple;">○</span> 외국인 비율 (원이 클수록 외국인 비율 높음)</p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_2ed475feaa0d54b999334fbcf3ee4b6d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2ed475feaa0d54b999334fbcf3ee4b6d = L.map(
+                "map_2ed475feaa0d54b999334fbcf3ee4b6d",
+                {
+                    center: [37.5665, 126.978],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a06744ebbd2f068dd80e9a69cb75339a = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a06744ebbd2f068dd80e9a69cb75339a.addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+            var heat_map_b9b6514371583ca082d8e5d3db17540d = L.heatLayer(
+                [[37.572484, 126.977293, 51.23], [37.564484, 126.997293, 61.2], [37.538484, 126.977293, 36.58], [37.563341, 127.036848, 22.49], [37.538484, 127.082293, 23.67], [37.574397, 127.03955, 23.2], [37.606484, 127.092293, 22.05], [37.589116, 127.016778, 16.64], [37.639604, 127.025653, 25.04], [37.668773, 127.047152, 15.94], [37.654359, 127.056473, 17.85], [37.602484, 126.929293, 18.92], [37.579116, 126.936778, 18.51], [37.563341, 126.908287, 27.97], [37.517305, 126.866502, 17.2], [37.550966, 126.849532, 20.37], [37.495485, 126.887369, 21.74], [37.456455, 126.89531, 26.43], [37.526402, 126.896252, 29.9], [37.512402, 126.939252, 20.36], [37.478406, 126.951613, 27.26], [37.483664, 127.032411, 35.83], [37.517305, 127.047502, 44.35], [37.514402, 127.106252, 22.66], [37.549207, 127.145482, 18.11]],
+                {
+  "minOpacity": 0.6,
+  "maxZoom": 1,
+  "radius": 20,
+  "blur": 15,
+  "gradient": {
+  0.3: "blue",
+  0.5: "lime",
+  0.7: "yellow",
+  1: "red",
+},
+  "maxOpacity": 1.0,
+}
+            );
+        
+    
+            heat_map_b9b6514371583ca082d8e5d3db17540d.addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+            var circle_marker_cc47a33b7bc4ff97d14d49ba3ada610a = L.circleMarker(
+                [37.572484, 126.977293],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.84, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_07c2ef36616470452792e625af7ae56d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_49fed1f19b339975b03161e99df880b4 = $(`<div id="html_49fed1f19b339975b03161e99df880b4" style="width: 100.0%; height: 100.0%;">종로구<br>총 범죄수: 7685건<br>인구 1,000명당 범죄수: 51.23건<br>외국인 비율: 7.42%</div>`)[0];
+                popup_07c2ef36616470452792e625af7ae56d.setContent(html_49fed1f19b339975b03161e99df880b4);
+            
+        
+
+        circle_marker_cc47a33b7bc4ff97d14d49ba3ada610a.bindPopup(popup_07c2ef36616470452792e625af7ae56d)
+        ;
+
+        
+    
+    
+            var circle_marker_b2444596586d2ded0287ab295f9cc56a = L.circleMarker(
+                [37.564484, 126.997293],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.6, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_6ec69b26a68a6a1b18acaac29f5854dd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_89c6340c6b6ff56de7231054bb817da0 = $(`<div id="html_89c6340c6b6ff56de7231054bb817da0" style="width: 100.0%; height: 100.0%;">중구<br>총 범죄수: 8053건<br>인구 1,000명당 범죄수: 61.2건<br>외국인 비율: 7.8%</div>`)[0];
+                popup_6ec69b26a68a6a1b18acaac29f5854dd.setContent(html_89c6340c6b6ff56de7231054bb817da0);
+            
+        
+
+        circle_marker_b2444596586d2ded0287ab295f9cc56a.bindPopup(popup_6ec69b26a68a6a1b18acaac29f5854dd)
+        ;
+
+        
+    
+    
+            var circle_marker_f21036443eab31c22a09a535c2c143fc = L.circleMarker(
+                [37.538484, 126.977293],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.119999999999997, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_3ba0244aac2e02cdd312ce663d291948 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6124ae3bd461fe16917ccbbe6af21b78 = $(`<div id="html_6124ae3bd461fe16917ccbbe6af21b78" style="width: 100.0%; height: 100.0%;">용산구<br>총 범죄수: 7988건<br>인구 1,000명당 범죄수: 36.58건<br>외국인 비율: 6.06%</div>`)[0];
+                popup_3ba0244aac2e02cdd312ce663d291948.setContent(html_6124ae3bd461fe16917ccbbe6af21b78);
+            
+        
+
+        circle_marker_f21036443eab31c22a09a535c2c143fc.bindPopup(popup_3ba0244aac2e02cdd312ce663d291948)
+        ;
+
+        
+    
+    
+            var circle_marker_fcb458bcbcef80ed961edec8577c183e = L.circleMarker(
+                [37.563341, 127.036848],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.940000000000001, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_3027726b7b4a7f1f20567cfa73a04d3c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bef5e9b3c4f3aff8d9c0113e4552ea6e = $(`<div id="html_bef5e9b3c4f3aff8d9c0113e4552ea6e" style="width: 100.0%; height: 100.0%;">성동구<br>총 범죄수: 6350건<br>인구 1,000명당 범죄수: 22.49건<br>외국인 비율: 2.47%</div>`)[0];
+                popup_3027726b7b4a7f1f20567cfa73a04d3c.setContent(html_bef5e9b3c4f3aff8d9c0113e4552ea6e);
+            
+        
+
+        circle_marker_fcb458bcbcef80ed961edec8577c183e.bindPopup(popup_3027726b7b4a7f1f20567cfa73a04d3c)
+        ;
+
+        
+    
+    
+            var circle_marker_2af7cdb454054dd73306c62852ed62c8 = L.circleMarker(
+                [37.538484, 127.082293],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.1, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_2d7602db4995a4c52d8abe9f224cd83a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8ef0a2fb49f7d00f86520759f12efaa7 = $(`<div id="html_8ef0a2fb49f7d00f86520759f12efaa7" style="width: 100.0%; height: 100.0%;">광진구<br>총 범죄수: 8268건<br>인구 1,000명당 범죄수: 23.67건<br>외국인 비율: 4.55%</div>`)[0];
+                popup_2d7602db4995a4c52d8abe9f224cd83a.setContent(html_8ef0a2fb49f7d00f86520759f12efaa7);
+            
+        
+
+        circle_marker_2af7cdb454054dd73306c62852ed62c8.bindPopup(popup_2d7602db4995a4c52d8abe9f224cd83a)
+        ;
+
+        
+    
+    
+            var circle_marker_1367270f2d3b3a98a588c3eb3a3e93a6 = L.circleMarker(
+                [37.574397, 127.03955],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.32, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_81c09449e9f79cd434ec4e0c9c83e986 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_095dd15508db45d59493225ff77cdd20 = $(`<div id="html_095dd15508db45d59493225ff77cdd20" style="width: 100.0%; height: 100.0%;">동대문구<br>총 범죄수: 8333건<br>인구 1,000명당 범죄수: 23.2건<br>외국인 비율: 5.16%</div>`)[0];
+                popup_81c09449e9f79cd434ec4e0c9c83e986.setContent(html_095dd15508db45d59493225ff77cdd20);
+            
+        
+
+        circle_marker_1367270f2d3b3a98a588c3eb3a3e93a6.bindPopup(popup_81c09449e9f79cd434ec4e0c9c83e986)
+        ;
+
+        
+    
+    
+            var circle_marker_bed9dd5dd39ecba99cb933fdf4568218 = L.circleMarker(
+                [37.606484, 127.092293],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_571b2eaae026531372307e1e39397e16 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e58a25fd93f43829258ed8909a5f9269 = $(`<div id="html_e58a25fd93f43829258ed8909a5f9269" style="width: 100.0%; height: 100.0%;">중랑구<br>총 범죄수: 8513건<br>인구 1,000명당 범죄수: 22.05건<br>외국인 비율: 1.5%</div>`)[0];
+                popup_571b2eaae026531372307e1e39397e16.setContent(html_e58a25fd93f43829258ed8909a5f9269);
+            
+        
+
+        circle_marker_bed9dd5dd39ecba99cb933fdf4568218.bindPopup(popup_571b2eaae026531372307e1e39397e16)
+        ;
+
+        
+    
+    
+            var circle_marker_7cfedfc3ee46df8c29e7d74a0869155b = L.circleMarker(
+                [37.589116, 127.016778],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.54, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_0d612014b24ba73a18a77e425ff48cb6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f466f4b9cca81e9444e7fc28abe371da = $(`<div id="html_f466f4b9cca81e9444e7fc28abe371da" style="width: 100.0%; height: 100.0%;">성북구<br>총 범죄수: 7246건<br>인구 1,000명당 범죄수: 16.64건<br>외국인 비율: 2.77%</div>`)[0];
+                popup_0d612014b24ba73a18a77e425ff48cb6.setContent(html_f466f4b9cca81e9444e7fc28abe371da);
+            
+        
+
+        circle_marker_7cfedfc3ee46df8c29e7d74a0869155b.bindPopup(popup_0d612014b24ba73a18a77e425ff48cb6)
+        ;
+
+        
+    
+    
+            var circle_marker_088e194b5da455a9653b5ab780eca093 = L.circleMarker(
+                [37.639604, 127.025653],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.7, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_b4c1a69fa6f1ee02408b067f3d4b9f05 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_27b332c9ef08b207a7c885af3fab09c1 = $(`<div id="html_27b332c9ef08b207a7c885af3fab09c1" style="width: 100.0%; height: 100.0%;">강북구<br>총 범죄수: 7253건<br>인구 1,000명당 범죄수: 25.04건<br>외국인 비율: 1.85%</div>`)[0];
+                popup_b4c1a69fa6f1ee02408b067f3d4b9f05.setContent(html_27b332c9ef08b207a7c885af3fab09c1);
+            
+        
+
+        circle_marker_088e194b5da455a9653b5ab780eca093.bindPopup(popup_b4c1a69fa6f1ee02408b067f3d4b9f05)
+        ;
+
+        
+    
+    
+            var circle_marker_58ebdc666cc61857e69290dcc1517cad = L.circleMarker(
+                [37.668773, 127.047152],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.74, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_bb26ce9fa6155636e97684dcd8f86686 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_133d5037d24f9f8e9fe31f22b2ab472e = $(`<div id="html_133d5037d24f9f8e9fe31f22b2ab472e" style="width: 100.0%; height: 100.0%;">도봉구<br>총 범죄수: 4891건<br>인구 1,000명당 범죄수: 15.94건<br>외국인 비율: 0.87%</div>`)[0];
+                popup_bb26ce9fa6155636e97684dcd8f86686.setContent(html_133d5037d24f9f8e9fe31f22b2ab472e);
+            
+        
+
+        circle_marker_58ebdc666cc61857e69290dcc1517cad.bindPopup(popup_bb26ce9fa6155636e97684dcd8f86686)
+        ;
+
+        
+    
+    
+            var circle_marker_a7b2ffe1037e362a5e9c06d7ad232894 = L.circleMarker(
+                [37.654359, 127.056473],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.96, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_255adfe5bb0025f472e023c147b32365 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f295c542b10627989f1068f65cc3d0b5 = $(`<div id="html_f295c542b10627989f1068f65cc3d0b5" style="width: 100.0%; height: 100.0%;">노원구<br>총 범죄수: 8896건<br>인구 1,000명당 범죄수: 17.85건<br>외국인 비율: 0.98%</div>`)[0];
+                popup_255adfe5bb0025f472e023c147b32365.setContent(html_f295c542b10627989f1068f65cc3d0b5);
+            
+        
+
+        circle_marker_a7b2ffe1037e362a5e9c06d7ad232894.bindPopup(popup_255adfe5bb0025f472e023c147b32365)
+        ;
+
+        
+    
+    
+            var circle_marker_b4aff6e03434aafd62d3c12231a91f26 = L.circleMarker(
+                [37.602484, 126.929293],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.84, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_83499c3b8e28c6482a97db44f7293dc6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_03e89fd3fc24d6de034870302e538189 = $(`<div id="html_03e89fd3fc24d6de034870302e538189" style="width: 100.0%; height: 100.0%;">은평구<br>총 범죄수: 8833건<br>인구 1,000명당 범죄수: 18.92건<br>외국인 비율: 0.92%</div>`)[0];
+                popup_83499c3b8e28c6482a97db44f7293dc6.setContent(html_03e89fd3fc24d6de034870302e538189);
+            
+        
+
+        circle_marker_b4aff6e03434aafd62d3c12231a91f26.bindPopup(popup_83499c3b8e28c6482a97db44f7293dc6)
+        ;
+
+        
+    
+    
+            var circle_marker_c1130ca9bed1747e9062d4ecc50a2efa = L.circleMarker(
+                [37.579116, 126.936778],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.52, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_d033cf7ca4bb911f4e4011a9c688a84c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ca5249532ea312629b40c43108ddd6ff = $(`<div id="html_ca5249532ea312629b40c43108ddd6ff" style="width: 100.0%; height: 100.0%;">서대문구<br>총 범죄수: 5919건<br>인구 1,000명당 범죄수: 18.51건<br>외국인 비율: 4.76%</div>`)[0];
+                popup_d033cf7ca4bb911f4e4011a9c688a84c.setContent(html_ca5249532ea312629b40c43108ddd6ff);
+            
+        
+
+        circle_marker_c1130ca9bed1747e9062d4ecc50a2efa.bindPopup(popup_d033cf7ca4bb911f4e4011a9c688a84c)
+        ;
+
+        
+    
+    
+            var circle_marker_d0de23e2e78e528c2b1cfaed1274c758 = L.circleMarker(
+                [37.563341, 126.908287],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.059999999999999, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_687e2b9b3e0a1cc89d500c854c74030d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a785ed644081a2c04e4f11b644e2aeda = $(`<div id="html_a785ed644081a2c04e4f11b644e2aeda" style="width: 100.0%; height: 100.0%;">마포구<br>총 범죄수: 10459건<br>인구 1,000명당 범죄수: 27.97건<br>외국인 비율: 3.03%</div>`)[0];
+                popup_687e2b9b3e0a1cc89d500c854c74030d.setContent(html_a785ed644081a2c04e4f11b644e2aeda);
+            
+        
+
+        circle_marker_d0de23e2e78e528c2b1cfaed1274c758.bindPopup(popup_687e2b9b3e0a1cc89d500c854c74030d)
+        ;
+
+        
+    
+    
+            var circle_marker_908395fedda30fd8ec47a82a120bc0eb = L.circleMarker(
+                [37.517305, 126.866502],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.54, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_ffbb739d4618e1ccffe4f00cfc2a3ef4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c93383a3f45303b6d14d2490febdbbba = $(`<div id="html_c93383a3f45303b6d14d2490febdbbba" style="width: 100.0%; height: 100.0%;">양천구<br>총 범죄수: 7497건<br>인구 1,000명당 범죄수: 17.2건<br>외국인 비율: 0.77%</div>`)[0];
+                popup_ffbb739d4618e1ccffe4f00cfc2a3ef4.setContent(html_c93383a3f45303b6d14d2490febdbbba);
+            
+        
+
+        circle_marker_908395fedda30fd8ec47a82a120bc0eb.bindPopup(popup_ffbb739d4618e1ccffe4f00cfc2a3ef4)
+        ;
+
+        
+    
+    
+            var circle_marker_a5c16a6418b7233c825743c171d70595 = L.circleMarker(
+                [37.550966, 126.849532],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.08, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_8587d3b42ad5898e53e95a4953ec1ab2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e144289965d6a0e3c85f220608511c91 = $(`<div id="html_e144289965d6a0e3c85f220608511c91" style="width: 100.0%; height: 100.0%;">강서구<br>총 범죄수: 11479건<br>인구 1,000명당 범죄수: 20.37건<br>외국인 비율: 1.04%</div>`)[0];
+                popup_8587d3b42ad5898e53e95a4953ec1ab2.setContent(html_e144289965d6a0e3c85f220608511c91);
+            
+        
+
+        circle_marker_a5c16a6418b7233c825743c171d70595.bindPopup(popup_8587d3b42ad5898e53e95a4953ec1ab2)
+        ;
+
+        
+    
+    
+            var circle_marker_a630260ca70b8ec2e1dfe9af5bb8357e = L.circleMarker(
+                [37.495485, 126.887369],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.16, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_892a37c3138a25deba488578e056015d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5b05e8236419ec3962c9b871273e07bd = $(`<div id="html_5b05e8236419ec3962c9b871273e07bd" style="width: 100.0%; height: 100.0%;">구로구<br>총 범죄수: 8967건<br>인구 1,000명당 범죄수: 21.74건<br>외국인 비율: 5.58%</div>`)[0];
+                popup_892a37c3138a25deba488578e056015d.setContent(html_5b05e8236419ec3962c9b871273e07bd);
+            
+        
+
+        circle_marker_a630260ca70b8ec2e1dfe9af5bb8357e.bindPopup(popup_892a37c3138a25deba488578e056015d)
+        ;
+
+        
+    
+    
+            var circle_marker_4567cd640fab39c9c3fb8bd632cbf9b8 = L.circleMarker(
+                [37.456455, 126.89531],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.34, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_2be02629eb795f12c5cfb8fb27843e30 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a57bf76abeb290cddea59baf2cf7408 = $(`<div id="html_8a57bf76abeb290cddea59baf2cf7408" style="width: 100.0%; height: 100.0%;">금천구<br>총 범죄수: 6333건<br>인구 1,000명당 범죄수: 26.43건<br>외국인 비율: 5.67%</div>`)[0];
+                popup_2be02629eb795f12c5cfb8fb27843e30.setContent(html_8a57bf76abeb290cddea59baf2cf7408);
+            
+        
+
+        circle_marker_4567cd640fab39c9c3fb8bd632cbf9b8.bindPopup(popup_2be02629eb795f12c5cfb8fb27843e30)
+        ;
+
+        
+    
+    
+            var circle_marker_9de5c3fa827c9a0afc6e64b148c5b5dd = L.circleMarker(
+                [37.526402, 126.896252],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.5, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_681734404f5ea8d8ad2e5e1c1c77e94e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b675ec9d3ffdd0b8a51c8a422e139a6d = $(`<div id="html_b675ec9d3ffdd0b8a51c8a422e139a6d" style="width: 100.0%; height: 100.0%;">영등포구<br>총 범죄수: 11885건<br>인구 1,000명당 범죄수: 29.9건<br>외국인 비율: 5.75%</div>`)[0];
+                popup_681734404f5ea8d8ad2e5e1c1c77e94e.setContent(html_b675ec9d3ffdd0b8a51c8a422e139a6d);
+            
+        
+
+        circle_marker_9de5c3fa827c9a0afc6e64b148c5b5dd.bindPopup(popup_681734404f5ea8d8ad2e5e1c1c77e94e)
+        ;
+
+        
+    
+    
+            var circle_marker_1b53d7f9ad4ad205837662a37291dcfa = L.circleMarker(
+                [37.512402, 126.939252],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.5, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_2d2ff40131a4845e3dc14ac0baf1d798 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1b119760bbcc2dd24c8e9999dbaff1a1 = $(`<div id="html_1b119760bbcc2dd24c8e9999dbaff1a1" style="width: 100.0%; height: 100.0%;">동작구<br>총 범죄수: 7895건<br>인구 1,000명당 범죄수: 20.36건<br>외국인 비율: 2.75%</div>`)[0];
+                popup_2d2ff40131a4845e3dc14ac0baf1d798.setContent(html_1b119760bbcc2dd24c8e9999dbaff1a1);
+            
+        
+
+        circle_marker_1b53d7f9ad4ad205837662a37291dcfa.bindPopup(popup_2d2ff40131a4845e3dc14ac0baf1d798)
+        ;
+
+        
+    
+    
+            var circle_marker_21830ff2161b3cecc3bd69d78cc1986b = L.circleMarker(
+                [37.478406, 126.951613],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.719999999999999, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_49a0a477273cef0414da2d2d5c4d9430 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b83d2b3e7a92bc6a6644cc4f1beadf2a = $(`<div id="html_b83d2b3e7a92bc6a6644cc4f1beadf2a" style="width: 100.0%; height: 100.0%;">관악구<br>총 범죄수: 13534건<br>인구 1,000명당 범죄수: 27.26건<br>외국인 비율: 3.36%</div>`)[0];
+                popup_49a0a477273cef0414da2d2d5c4d9430.setContent(html_b83d2b3e7a92bc6a6644cc4f1beadf2a);
+            
+        
+
+        circle_marker_21830ff2161b3cecc3bd69d78cc1986b.bindPopup(popup_49a0a477273cef0414da2d2d5c4d9430)
+        ;
+
+        
+    
+    
+            var circle_marker_5813e4a5ad6aecf7dde8a5adb105b66f = L.circleMarker(
+                [37.483664, 127.032411],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.2, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_981773cf535bf922608c495d38a23651 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0b303b9c170b8cc51ed8fc1d7710bb10 = $(`<div id="html_0b303b9c170b8cc51ed8fc1d7710bb10" style="width: 100.0%; height: 100.0%;">서초구<br>총 범죄수: 14784건<br>인구 1,000명당 범죄수: 35.83건<br>외국인 비율: 1.1%</div>`)[0];
+                popup_981773cf535bf922608c495d38a23651.setContent(html_0b303b9c170b8cc51ed8fc1d7710bb10);
+            
+        
+
+        circle_marker_5813e4a5ad6aecf7dde8a5adb105b66f.bindPopup(popup_981773cf535bf922608c495d38a23651)
+        ;
+
+        
+    
+    
+            var circle_marker_92295f888a8d7f32fee0e12298d2bced = L.circleMarker(
+                [37.517305, 127.047502],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.04, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_9532e90f65ed5be9aaf4d1e6bc9dd9af = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d25368bee689f18e239f7bfb39852dba = $(`<div id="html_d25368bee689f18e239f7bfb39852dba" style="width: 100.0%; height: 100.0%;">강남구<br>총 범죄수: 25024건<br>인구 1,000명당 범죄수: 44.35건<br>외국인 비율: 1.02%</div>`)[0];
+                popup_9532e90f65ed5be9aaf4d1e6bc9dd9af.setContent(html_d25368bee689f18e239f7bfb39852dba);
+            
+        
+
+        circle_marker_92295f888a8d7f32fee0e12298d2bced.bindPopup(popup_9532e90f65ed5be9aaf4d1e6bc9dd9af)
+        ;
+
+        
+    
+    
+            var circle_marker_ed7a0bcd7f9631972862f9c7124b59f9 = L.circleMarker(
+                [37.514402, 127.106252],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.86, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_cb6ece886316449c7f64216edf768f8b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_09f5b63e11d490e54a9296cb59af634c = $(`<div id="html_09f5b63e11d490e54a9296cb59af634c" style="width: 100.0%; height: 100.0%;">송파구<br>총 범죄수: 14907건<br>인구 1,000명당 범죄수: 22.66건<br>외국인 비율: 0.93%</div>`)[0];
+                popup_cb6ece886316449c7f64216edf768f8b.setContent(html_09f5b63e11d490e54a9296cb59af634c);
+            
+        
+
+        circle_marker_ed7a0bcd7f9631972862f9c7124b59f9.bindPopup(popup_cb6ece886316449c7f64216edf768f8b)
+        ;
+
+        
+    
+    
+            var circle_marker_d4deebc6837ac0e7eaa9bcaea4cbd6d5 = L.circleMarker(
+                [37.549207, 127.145482],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.86, "stroke": true, "weight": 2}
+            ).addTo(map_2ed475feaa0d54b999334fbcf3ee4b6d);
+        
+    
+        var popup_9b540013d0f6710e626a720f780ebaf3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6b9c0a8426aeaff64a1e374779cca135 = $(`<div id="html_6b9c0a8426aeaff64a1e374779cca135" style="width: 100.0%; height: 100.0%;">강동구<br>총 범죄수: 8504건<br>인구 1,000명당 범죄수: 18.11건<br>외국인 비율: 0.93%</div>`)[0];
+                popup_9b540013d0f6710e626a720f780ebaf3.setContent(html_6b9c0a8426aeaff64a1e374779cca135);
+            
+        
+
+        circle_marker_d4deebc6837ac0e7eaa9bcaea4cbd6d5.bindPopup(popup_9b540013d0f6710e626a720f780ebaf3)
+        ;
+
+        
+    
+</script>
+</html>
