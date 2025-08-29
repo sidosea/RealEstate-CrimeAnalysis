@@ -282,21 +282,21 @@ CCTV 관련 변수를 제외하고 총범죄수와 외국인비율만을 사용�
 초기 모델은 낮은 신뢰도를 가지고 있었지만, 핵심 특성 선별과 모델 단순화 전략을 통해 약 68%의 설명력을 가진 모델을 완성할 수 있었습니다. 이번 분석을 통해 모델의 신뢰도를 높이는 방향에 대해 고민해볼 수 있었고, 앞으로도 이를 개선해 나갈 수 있는 기반을 마련한 뜻깊은 경험이었습니다.
 
 ---
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/af7c0767-139b-4450-8310-2c44e909b00c" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/c6766a39-5f5e-443c-9927-2cd5695d3481" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/6390586b-922b-47aa-bf66-f167579fe345" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/e491feb3-7b8d-4c67-8b57-37781be93e7a" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/c9682bcb-0513-4718-93f4-1fa0e5581ce0" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/3ec1b546-f2e4-4849-8d79-fb5b5ab3629e" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/7ef6095a-2b98-4840-9eb8-206c8a306632" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/359f7c33-2a15-4125-87fd-fea1619c1fd0" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/2f6f6b20-55f3-4d77-8e7c-625b5bcf7f4c" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/d0577295-765e-4bd7-a691-cacb4f2e9170" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/b57e160a-2c45-47b5-91ab-938ac5c1f69d" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/e6ccfdd2-d529-4ca1-8d32-06ad1ea6091a" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/ef8b25fa-1c8a-4471-a4f1-2ee3a249c4d2" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/b373eb1a-b136-4ad7-8531-f13216afc4f1" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/50b75063-fe02-471c-9f13-0f97f07967b4" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/f6251603-48a0-4389-b664-20d1c26df066" />
-<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/d4fb5bf8-1a9b-4822-aa0a-aad4161b1863" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/88904468-3ae7-41ca-987e-d488e0bf02c0" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/88d65785-586d-4dee-a975-b3b00e0ecfb4" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/c0e1ef08-53d6-4f13-a68c-ef621f90ac3e" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/19342429-b91e-4ca2-bacf-8bef485a8ca9" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/243ef1f0-7846-424a-9879-1ecea21fc154" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/a50d50f3-6231-4401-a6ff-d44358adc1a1" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/3ea2a6fb-3f30-42cf-95ba-7780ad3f4454" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/f5d22aa5-b54f-41c9-bc06-8c60d60f2c0d" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/59d65dc7-294a-499d-abfe-696e41e9e2f7" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/322154fc-7796-4bb4-8ed7-4639d94d4bc1" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/aad706f1-f339-48ad-bdcf-6491ded727e7" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/c804c613-5900-4d5c-9d78-040adbb40cfa" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/01471a08-ec3c-42e3-a631-e3171457fed1" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/b8285425-766d-4b65-b3a2-c016e35aaae0" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/eade508f-1466-4698-bc0b-2c9c6ac7f4ae" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/4b0e5857-10a3-49b9-ac3c-7887af6703e2" />
+<img width="4000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/d3f18bd7-399d-46a1-aec3-0c552ba68ae1" />
 
